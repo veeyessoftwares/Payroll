@@ -1,0 +1,195 @@
+﻿@model Common.EmployeeViewModel
+
+@{
+    ViewBag.Title = "AddEmployee";
+}
+
+
+
+<script type="text/javascript">
+
+    function UploadImage() {
+        $("#fileUpload").click();
+    }
+
+    function showimagepreview(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#BrokerPic').attr('src', "");
+                $('#BrokerPic').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+
+
+
+@using (Html.BeginForm("AddEmployee", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>EMPLOYEE</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EMPCODE, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.EMPCODE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EMPCODE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EMP_NAME, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.EMP_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EMP_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FATHER_NAME, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.FATHER_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FATHER_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MOTHER_NAME, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MOTHER_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MOTHER_NAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.GENDER, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.GENDER, ViewBag.ListGENDER as IEnumerable<SelectListItem>, "--Select GENDER--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GENDER, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MARITAL_STATUS, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.MARITAL_STATUS, ViewBag.ListMARITALSTATUS as IEnumerable<SelectListItem>, "--Select MARITAL STATUS--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MARITAL_STATUS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/dd/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IMAGE, htmlAttributes: new { @class = "control-label col-md-3" })
+
+                <div class="form-group">
+                    <img id="BrokerPic" height="85" width="85" src="@(Model.IMAGE)" />
+                    <input type="file" name="profpic" style="display:none" id="fileUpload" onchange="showimagepreview(this)" />
+                    <a onclick="UploadImage()">Choose</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MACCODE, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MACCODE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MACCODE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DOJ, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.DOJ, new { htmlAttributes = new { @class = "form-control", placeholder = "MM/dd/yyyy" } })
+                    @Html.ValidationMessageFor(model => model.DOJ, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DEPARTMENTID, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.DEPARTMENTID, ViewBag.ListDepartment as IEnumerable<SelectListItem>, "--Select Department--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DEPARTMENTID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DESIGNATIONID, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.DESIGNATIONID, ViewBag.ListDesignation as IEnumerable<SelectListItem>, "--Select Designation--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DESIGNATIONID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WAGES_TYPEID, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.WAGES_TYPEID, ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WAGES_TYPEID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UNITID, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.UNITID, ViewBag.ListUNIT as IEnumerable<SelectListItem>, "--Select UNIT--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UNITID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ACTUAL_SALARY, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ACTUAL_SALARY, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ACTUAL_SALARY, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ADUITING_SALARY, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ADUITING_SALARY, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ADUITING_SALARY, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input[name="DOB"],input[name="DOJ"]').datepicker({
+                dateFormat: "dd/MM/yyyy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+}
+
+
