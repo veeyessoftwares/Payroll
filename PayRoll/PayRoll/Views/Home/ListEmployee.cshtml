@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Common.EmployeeViewModel>
+
+@{
+    ViewBag.Title = "ListEmployee";
+}
+
+<h2>List Employee</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.EMPCODE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MACCODE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MARITAL_STATUS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GENDER)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.UNIT)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DEPARTMENT)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DESIGNATION)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.WAGESTYPE)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.ActionLink(@item.EMPCODE.ToString(), "UpdateEmployee", new { EMPID = item.EMPID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MACCODE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMP_NAME)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MARITAL_STATUS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GENDER)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UNIT)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DEPARTMENT)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DESIGNATION)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.WAGESTYPE)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

@@ -18,12 +18,16 @@
         public const string DESIGNATIONID = "DESIGNATION";
         public const string WAGES_TYPEID = "WAGES TYPE";
         public const string IMAGE = "IMAGE";
-        public const string IsActive ="";
-        public const string IsDeleted ="";
+        public const string Mode = "Mode";
+        public const string IsActive = "Is Active";
+        public const string IsDeleted = "Is Deleted";
         public const string CreatedBy ="";
         public const string CreatedDate ="";
         public const string ModifiedBy ="";
         public const string ModifiedDate ="";
+        public const string UserId = "UserId";
+        public const string ACTUAL = "ACTUAL";
+        public const string ADUITING = "ADUITING";
     }
 
     public enum Gender
@@ -36,6 +40,12 @@
     {
         Single,
         Married
+    }
+
+    public enum Mode
+    {
+        ACTUAL,
+        ADUITING
     }
 
 }

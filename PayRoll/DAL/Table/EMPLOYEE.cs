@@ -25,13 +25,14 @@ namespace DAL
         public Nullable<int> DESIGNATIONID { get; set; }
         public Nullable<int> WAGES_TYPEID { get; set; }
         public string IMAGE { get; set; }
+        public string Mode { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-    
-     
+
+
     }
 }
