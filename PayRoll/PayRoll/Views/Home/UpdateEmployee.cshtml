@@ -38,7 +38,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
+        <h2>Update Employee Information</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(moddel => Model.EMPID)

@@ -133,7 +133,7 @@ namespace PayRoll.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("ListEmployee");
 
         }
 
@@ -270,26 +270,99 @@ namespace PayRoll.Controllers
 
         public ActionResult ListEmployee()
         {
-            EmployeeRepository emp = new EmployeeRepository();
-            var res = emp.ListEmployee(Session[Constances.Mode].ToString());
-            return View(res);
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult ListEmployeeJson()
+        {
+            if (Session[Constances.UserId] != null)
+            {
+
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                //Get Sort columns value
+                //var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+                //var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int totalRecords = 0;
+
+                EmployeeRepository emp = new EmployeeRepository();
+                var res = emp.ListEmployee(Session[Constances.Mode].ToString());
+
+                totalRecords = res.Count();
+                var data = res.Skip(skip).Take(pageSize).ToList();
+                return Json(new { draw = draw, recordsFiltered = totalRecords, recordsTotal = totalRecords, data = data }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         #endregion
 
         public ActionResult TodayAttenance()
         {
-            CommonRepository c = new CommonRepository();
-            var res = c.GetTodayAttenanceReport();
-            foreach (var r in res)
-            {
-                if (r.InTime != null)
-                {
-                    r.Hours = DateTime.Now - (DateTime.Now.Date + r.InTime);
-                }
-            }
-            return View(res);
+            CommonRepository _repo = new CommonRepository();
+            ViewBag.ListDepartment = _repo.ListDepartment();
+            ViewBag.ListDesignation = _repo.ListDesignation();
+            ViewBag.ListUNIT = _repo.ListUNIT();
+            ViewBag.ListWAGESTYPE = _repo.ListWAGESTYPE();
+            return View();
         }
+
+        [HttpPost]
+        public JsonResult TodayAttenanceJson()
+        {
+            if (Session[Constances.UserId] != null)
+            {
+                int UNIT = Request.Form["UNIT"].ToString() != "" ? Convert.ToInt32(Request.Form["UNIT"]) : 0;
+                int Department = Request.Form["Department"].ToString() != "" ? Convert.ToInt32(Request.Form["Department"]) : 0;
+                int DESIGNATION = Request.Form["DESIGNATION"].ToString() != "" ? Convert.ToInt32(Request.Form["DESIGNATION"]) : 0;
+
+                var draw = Request.Form.GetValues("draw").FirstOrDefault();
+                var start = Request.Form.GetValues("start").FirstOrDefault();
+                var length = Request.Form.GetValues("length").FirstOrDefault();
+                //Get Sort columns value
+                //var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
+               // var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
+
+                int pageSize = length != null ? Convert.ToInt32(length) : 0;
+                int skip = start != null ? Convert.ToInt32(start) : 0;
+                int totalRecords = 0;
+
+                CommonRepository c = new CommonRepository();
+                var res = c.GetTodayAttenanceReport(Session[Constances.Mode].ToString(), UNIT, Department, DESIGNATION);
+
+                totalRecords = res.Count();
+                var data = res.Skip(skip).Take(pageSize).ToList();
+
+                foreach (var d in data)
+                {
+                    if (d.InTime != null)
+                    {
+                        d.sInTime = Convert.ToDateTime(DateTime.Now.Date + d.InTime).ToString("hh:mm tt");
+                        d.sOutTime = Convert.ToDateTime(DateTime.Now.Date + d.OutTime).ToString("hh:mm tt");
+                        d.Hours = Convert.ToDateTime(DateTime.Now.Date + (DateTime.Now - (DateTime.Now.Date + d.InTime))).ToString("HH:mm");
+                    }
+                }
+
+                return Json(new { draw = draw, recordsFiltered = totalRecords, recordsTotal = totalRecords, data = data }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
 
         public JsonResult UpdateMode()
         {

@@ -115,7 +115,7 @@ namespace BLL
                                join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
                                join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
                                join W in _dbcontext.WAGESTYPEs on e.WAGES_TYPEID equals W.WGId
-                               where e.IsActive == true && e.Mode == mode
+                               where e.IsDeleted == false && e.Mode == mode
                                select new EmployeeViewModel()
                                {
                                    EMPID = e.EMPID,
@@ -134,7 +134,7 @@ namespace BLL
                                    DEPARTMENT = dep.DEPT,
                                    DESIGNATION = des.DESG,
                                    WAGESTYPE = W.Type
-                               }).ToList();
+                               }).OrderBy(x => x.EMPCODE).ToList();
                     return Emp;
                 }
                 else
@@ -144,7 +144,7 @@ namespace BLL
                                join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
                                join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
                                join W in _dbcontext.WAGESTYPEs on e.WAGES_TYPEID equals W.WGId
-                               where e.IsActive == true
+                               where e.IsDeleted == false
                                select new EmployeeViewModel()
                                {
                                    EMPID = e.EMPID,
@@ -163,21 +163,21 @@ namespace BLL
                                    DEPARTMENT = dep.DEPT,
                                    DESIGNATION = des.DESG,
                                    WAGESTYPE = W.Type
-                               }).ToList();
+                               }).OrderBy(x => x.EMPCODE).ToList();
                     return Emp;
                 }
             }
         }
 
-        public bool DeleteEmployee(int EMPID)
-        {
-            using (var _dbcontext = new PayRollEntities())
-            {
-                var emp = (from e in _dbcontext.EMPLOYEEs where e.EMPID == EMPID select e).FirstOrDefault();
-                _dbcontext.EMPLOYEEs.Remove(emp);
-                _dbcontext.SaveChanges();
-                return true;
-            }
-        }
+        //public bool DeleteEmployee(int EMPID)
+        //{
+        //    using (var _dbcontext = new PayRollEntities())
+        //    {
+        //        var emp = (from e in _dbcontext.EMPLOYEEs where e.EMPID == EMPID select e).FirstOrDefault();
+        //        _dbcontext.EMPLOYEEs.Remove(emp);
+        //        _dbcontext.SaveChanges();
+        //        return true;
+        //    }
+        //}
     }
 }
