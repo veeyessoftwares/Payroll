@@ -1,0 +1,7 @@
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\bin\Release\Common.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\bin\Release\Common.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\bin\Release\Utility.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\bin\Release\Utility.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\obj\Release\Common.csprojResolveAssemblyReference.cache
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\obj\Release\Common.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Common\obj\Release\Common.pdb
