@@ -21,13 +21,18 @@
         public const string Mode = "Mode";
         public const string IsActive = "Is Active";
         public const string IsDeleted = "Is Deleted";
-        public const string CreatedBy ="";
-        public const string CreatedDate ="";
-        public const string ModifiedBy ="";
-        public const string ModifiedDate ="";
+        public const string CreatedBy = "Created By";
+        public const string CreatedDate = "Created Date";
+        public const string ModifiedBy = "Modified By";
+        public const string ModifiedDate = "Modified Date";
         public const string UserId = "UserId";
         public const string ACTUAL = "ACTUAL";
         public const string ADUITING = "ADUITING";
+
+        public const string sAttendanceDate = "Date";
+        public const string sInTime = "In Time";
+        public const string sOutTime = "Out Time";
+
     }
 
     public enum Gender

@@ -25,13 +25,15 @@ namespace PayRoll.Models
         {
         }
 
+        //static ApplicationDbContext()
+        //{
+        //    // We do not want to regenerate the database if there is an issue with the database to model mapping.  Just show the error.
+        //    Database.SetInitializer<ApplicationDbContext>(null);
+        //}
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
-        }
-
-        public System.Data.Entity.DbSet<DAL.EMPLOYEE> EMPLOYEEs { get; set; }
-
-        public System.Data.Entity.DbSet<DAL.UNIT> UNITs { get; set; }
+        }      
     }
 }

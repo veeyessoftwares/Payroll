@@ -1,0 +1,5 @@
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\bin\Debug\Utility.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\bin\Debug\Utility.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Debug\Utility.csprojResolveAssemblyReference.cache
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Debug\Utility.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Debug\Utility.pdb
