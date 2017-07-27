@@ -1,5 +1,0 @@
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\bin\Release\Utility.dll
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\bin\Release\Utility.pdb
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Release\Utility.csprojResolveAssemblyReference.cache
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Release\Utility.dll
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\Utility\obj\Release\Utility.pdb

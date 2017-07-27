@@ -1,7 +1,5 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AttenanceReport";
-    var Date = DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy");
 }
 
 <h2>Employee Attenance Report</h2>
@@ -54,7 +52,7 @@
     var datatable;
     $(document).ready(function () {
 
-        $("#Date").val('@Date');
+        $("#Date").val('@ViewBag.date');
 
         $('input[name="Date"]').datepicker({
             dateFormat: "MM/dd/yyyy",
