@@ -68,6 +68,105 @@
             }
         }
 
+        public List<AttenanceViewModel> GetAttenanceReport(string Mode, DateTime Date)
+        {
+            using (var _dbcontext = new PayRollEntities())
+            {
+
+                List<EMPLOYEE> emp = new List<EMPLOYEE>();
+
+                if (Mode == "ADUITING")
+                {
+                    emp = _dbcontext.EMPLOYEEs.Where(x => x.Mode == "ADUITING").ToList();
+                }
+                else
+                {
+                    emp = _dbcontext.EMPLOYEEs.ToList();
+                }
+
+                var Empdetails = (from e in emp
+                                  join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
+                                  join dep in _dbcontext.Departments on e.DEPARTMENTID equals dep.DepId
+                                  join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
+                                  select new AttenanceViewModel()
+                                  {
+                                      EMPID = e.EMPID,
+                                      Unit = u.Name,
+                                      Department = dep.DEPT,
+                                      Designation = des.DESG,
+                                      EmpName = e.EMP_NAME,
+                                      EmpCode = e.EMPCODE
+                                  }).ToList();
+
+                var Attdetails = (from ai in _dbcontext.ATTENDANCE_IMPORT
+                                  where ai.AttendanceDate == DbFunctions.TruncateTime(Date)
+                                  select ai).ToList();
+
+                var res = (from e in Empdetails
+                           join at in Attdetails on e.EmpCode equals at.EmployeeId into Attendance
+                           from ai in Attendance.DefaultIfEmpty()
+                           select new AttenanceViewModel()
+                           {
+                               EMPID = e.EMPID,
+                               Unit = e.Unit,
+                               Department = e.Department,
+                               Designation = e.Designation,
+                               EmpName = e.EmpName,
+                               EmpCode = e.EmpCode,
+                               InTime = ai != null ? ai.InTime : null,
+                               OutTime = ai != null ? ai.OutTime : null,
+                               PunchRecords = ai != null ? ai.PunchRecords : "",
+                               Status = ai != null ? "Present" : "Absent",
+                               Attenanceid = ai != null ? ai.Id : 0
+                           }).ToList();
+
+                return res;
+            }
+        }
+
+        public ATTENDANCE_IMPORT GetAttenancedate(int id)
+        {
+            using (var _dbcontext = new PayRollEntities())
+            {
+                return _dbcontext.ATTENDANCE_IMPORT.Where(x => x.Id == id).FirstOrDefault();
+            }
+        }
+
+        public bool UpdateAttenance(AttenanceModel am)
+        {
+            using (var _dbcontext = new PayRollEntities())
+            {
+                var at = (from a in _dbcontext.ATTENDANCE_IMPORT where a.Id == am.Id select a).FirstOrDefault();
+                at.InTime = am.InTime;
+                at.OutTime = am.OutTime;
+                at.PunchRecords = am.PunchRecords;
+                _dbcontext.Entry(at).State = EntityState.Modified;
+                _dbcontext.SaveChanges();
+                return true;
+            }
+        }
+
+        public int AddAttenance(ATTENDANCE_IMPORT ai)
+        {
+            using (var _dbcontext = new PayRollEntities())
+            {
+                var att = (from aim in _dbcontext.ATTENDANCE_IMPORT where aim.EmployeeId == ai.EmployeeId && aim.AttendanceDate == DbFunctions.TruncateTime(ai.AttendanceDate) select aim).FirstOrDefault();
+                if (att == null)
+                {
+                    _dbcontext.ATTENDANCE_IMPORT.Add(ai);
+                    _dbcontext.SaveChanges();
+                    return ai.Id;
+                }
+                else
+                {
+                    return -2;
+                }
+
+            }
+        }
+
+        #region Pick List
+
         public IEnumerable<SelectListItem> ListDepartment()
         {
             using (var context = new PayRollEntities())
@@ -108,5 +207,6 @@
             }
         }
 
+        #endregion
     }
 }

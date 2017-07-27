@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "AttenanceReport";
+    var Date = DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy");
+}
+
+<h2>Employee Attenance Report</h2>
+@using (Html.BeginForm())
+{
+    <div class="col-md-3">
+
+        @Html.Editor("Date", new { htmlAttributes = new { @class = "form-control", placeholder = "MM/dd/yyyy" } })
+        <br />
+    </div>
+}
+
+<table id="todayattenance" style="border: 1px solid black;" class="table">
+    <thead>
+        <tr>
+            <th>
+                Unit
+            </th>
+            <th>
+                EmpCode
+            </th>
+            <th>
+                EmpName
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Designation
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                InTime
+            </th>
+            <th>
+                OutTime
+            </th>
+            <th>
+                Hours worked
+            </th>
+
+        </tr>
+    </thead>
+</table>
+
+
+<script type="text/javascript">
+    var datatable;
+    $(document).ready(function () {
+
+        $("#Date").val('@Date');
+
+        $('input[name="Date"]').datepicker({
+            dateFormat: "MM/dd/yyyy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+
+        LoadData();
+
+        $("#Date").on("change", function () {
+            datatable.ajax.reload();
+        })
+
+    });
+
+    function LoadData() {
+
+        datatable = $("#todayattenance").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": false,
+            "ajax": {
+                "url": "/home/AttenanceReportJson",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (d) {
+                    d.Date = $("#Date").val();
+                }
+            },
+            "columns": [
+                { "data": "Unit", "name": "Unit", "autoWidth": true },
+                {
+                    "mRender": function (data, type, row) {
+                        if (row.Attenanceid != 0) {
+                            return '<a href=/home/UpdateAttenance?id=' + row.Attenanceid + '>' + row.EmpCode + '</a>';
+                        } else {
+                            return row.EmpCode
+                        }
+
+                    }
+                },
+                    { "data": "EmpName", "name": "EmpName", "autoWidth": true },
+                    { "data": "Department", "name": "Department", "autoWidth": true },
+                    { "data": "Designation", "name": "Designation", "autoWidth": true },
+                    { "data": "Status", "name": "Status", "autoWidth": true },
+                    { "data": "sInTime", "name": "InTime", "autoWidth": true },
+                    { "data": "sOutTime", "name": "OutTime", "autoWidth": true },
+                    { "data": "Hours", "name": "Hours", "autoWidth": true }],
+            "order": [[1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc']],
+            "bSort": false,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "iCookieDuration": 60 * 60 * 24,
+        })
+
+
+    }
+
+</script>
+

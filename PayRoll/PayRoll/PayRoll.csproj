@@ -213,6 +213,7 @@
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -272,6 +273,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -320,6 +322,9 @@
     <Content Include="Views\Home\TodayAttenance.cshtml" />
     <Content Include="Views\Home\ListEmployee.cshtml" />
     <Content Include="Views\Home\UpdateEmployee.cshtml" />
+    <Content Include="Views\Home\AttenanceReport.cshtml" />
+    <Content Include="Views\Home\AddAttenance.cshtml" />
+    <Content Include="Views\Home\UpdateAttenance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
