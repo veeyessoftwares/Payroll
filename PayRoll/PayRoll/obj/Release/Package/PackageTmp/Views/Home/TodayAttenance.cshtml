@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "TodayAttenance";
+}
+
+<h2>Today Employee Attenance</h2>
+@using (Html.BeginForm())
+{
+    <div class="col-md-12">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.DropDownList("UNIT", ViewBag.ListUNIT as IEnumerable<SelectListItem>, "Filter by Unit", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.DropDownList("Department", ViewBag.ListDepartment as IEnumerable<SelectListItem>, "Filter by Department", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.DropDownList("DESIGNATION", ViewBag.ListDesignation as IEnumerable<SelectListItem>, "Filter by Designation", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        @*<div class="col-md-3">
+                <div class="form-group">
+                    @Html.DropDownList("WAGESTYPE", ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>*@
+
+    </div>
+}
+
+<table id="todayattenance" style="border: 1px solid black;" class="table">
+    <thead>
+        <tr>
+            <th>
+                Unit
+            </th>
+            <th>
+                EmpCode
+            </th>
+            <th>
+                EmpName
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Designation
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                InTime
+            </th>
+            <th>
+                OutTime
+            </th>
+            <th>
+                Hours
+            </th>
+
+        </tr>
+    </thead>
+</table>
+
+
+<script type="text/javascript">
+    var datatable;
+    $(document).ready(function () {
+
+        LoadData();
+
+        $("#UNIT,#Department,#DESIGNATION").on("change", function () {
+            datatable.ajax.reload();
+        })
+
+    });
+
+    function LoadData() {
+
+        datatable = $("#todayattenance").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": false,
+            "ajax": {
+                "url": "/home/TodayAttenanceJson",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (d) {
+                    d.UNIT = $("#UNIT").val();
+                    d.Department = $("#Department").val();
+                    d.DESIGNATION = $("#DESIGNATION").val();
+                }
+            },
+            "columns": [
+                { "data": "Unit", "name": "Unit", "autoWidth": true },
+                {
+                    "mRender": function (data, type, row) {
+                        return '<a href=/home/UpdateEmployee?EMPID=' + row.EMPID + '>' + row.EmpCode + '</a>';
+                    }
+                },
+                    { "data": "EmpName", "name": "EmpName", "autoWidth": true },
+                    { "data": "Department", "name": "Department", "autoWidth": true },
+                    { "data": "Designation", "name": "Designation", "autoWidth": true },
+                    { "data": "Status", "name": "Status", "autoWidth": true },
+                    { "data": "sInTime", "name": "InTime", "autoWidth": true },
+                    { "data": "sOutTime", "name": "OutTime", "autoWidth": true },
+                    { "data": "Hours", "name": "Hours", "autoWidth": true }],
+            "order": [[1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc']],
+            "bSort": false,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "iCookieDuration": 60 * 60 * 24,
+        })
+
+
+    }
+
+</script>

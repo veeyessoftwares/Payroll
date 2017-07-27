@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "ListEmployee";
+}
+<div class="col-md-12">
+    <a class="btn btn-default" style="margin: 20px 15px 10px 0px;" href="~/Home/AddEmployee">Add New Employee</a>
+</div>
+<div class="col-md-12">
+    <table id="ListEmployee" style="border: 1px solid black;" class="table">
+        <thead>
+            <tr>
+                <th>
+                    EMPCODE
+                </th>
+                <th>
+                    MACCODE
+                </th>
+                <th>
+                    EMP NAME
+                </th>
+                <th>
+                    MARITAL STATUS
+                </th>
+                <th>
+                    GENDER
+                </th>
+
+                <th>
+                    UNIT
+                </th>
+
+                <th>
+                    DEPARTMENT
+                </th>
+
+                <th>
+                    DESIGNATION
+                </th>
+
+                <th>
+                    WAGESTYPE
+                </th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#ListEmployee").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": false, // this is for disable filter (search box)
+            //"orderMulti": true, // for disable multiple column at once
+            "ajax": {
+                "url": "/home/ListEmployeeJson",
+                "type": "POST",
+                "datatype": "json"
+            },
+            "columns": [
+                {
+                    "mRender": function (data, type, row) {
+                        return '<a href=/home/UpdateEmployee?EMPID=' + row.EMPID + '>' + row.EMPCODE + '</a>';
+                    }
+                },
+                    { "data": "MACCODE", "name": "MACCODE", "autoWidth": true },
+                    { "data": "EMP_NAME", "name": "EMP NAME", "autoWidth": true },
+                    { "data": "MARITAL_STATUS", "name": "MARITAL STATUS", "autoWidth": true },
+                    { "data": "GENDER", "name": "GENDER", "autoWidth": true },
+                    { "data": "UNIT", "name": "UNIT", "autoWidth": true },
+                    { "data": "DEPARTMENT", "name": "DEPARTMENT", "autoWidth": true },
+                    { "data": "DESIGNATION", "name": "DESIGNATION", "autoWidth": true },
+                    { "data": "WAGESTYPE", "name": "WAGESTYPE", "autoWidth": true }],
+            "order": [[1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc']],
+            "bSort": false,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "iCookieDuration": 60 * 60 * 24,
+        })
+
+    });
+
+
+</script>

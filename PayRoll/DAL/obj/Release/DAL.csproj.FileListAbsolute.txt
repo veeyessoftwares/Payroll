@@ -1,0 +1,9 @@
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\DAL.dll.config
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\DAL.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\DAL.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\EntityFramework.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\EntityFramework.SqlServer.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\EntityFramework.xml
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Release\EntityFramework.SqlServer.xml
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Release\DAL.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Release\DAL.pdb
