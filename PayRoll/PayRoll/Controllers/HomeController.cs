@@ -388,8 +388,9 @@ namespace PayRoll.Controllers
 
         #region AttenanceReport
 
-        public ActionResult AttenanceReport()
+        public ActionResult AttenanceReport(string Date="")
         {
+            ViewBag.date = Date != "" ? Date : DateTime.Now.AddDays(-1).ToShortDateString();
             //CommonRepository _repo = new CommonRepository();
             //ViewBag.ListDepartment = _repo.ListDepartment();
             //ViewBag.ListDesignation = _repo.ListDesignation();
@@ -477,6 +478,7 @@ namespace PayRoll.Controllers
             am.sInTime = Convert.ToDateTime(DateTime.Now.Date + at.InTime).ToString("hh:mm tt");
             am.sOutTime = Convert.ToDateTime(DateTime.Now.Date + at.OutTime).ToString("hh:mm tt");
             am.PunchRecords = at.PunchRecords;
+            ViewBag.date = am.sAttendanceDate;
             return View(am);
         }
 
@@ -495,7 +497,7 @@ namespace PayRoll.Controllers
                 return View(am);
             }
 
-            return RedirectToAction("AttenanceReport");
+            return RedirectToAction("AttenanceReport", new { Date = Convert.ToDateTime(am.sAttendanceDate).ToString("MM/dd/yyyy") });
         }
 
         public ActionResult AddAttenance()
