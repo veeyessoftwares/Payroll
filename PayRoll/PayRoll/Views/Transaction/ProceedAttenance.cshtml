@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Proceed Attenance";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="small-12 columns">
+        <ul class="page-headline">
+            <li class="page-header">Employee Accounts</li>
+            <li class="page-header" id="subheader">Process Attenance</li>
+        </ul>
+    </div>
+    <div class="top-shadow"></div>
+    <div class="col-md-12" style="margin: 25px 0px 75px 0;">
+        <div class="col-md-2">
+            @Html.Editor("Date", new { htmlAttributes = new { @class = "form-control", placeholder = "dd/MM/yyyy" } })
+        </div>
+        <div class="col-md-3">
+            <input type="button" id="Proceed" class="btn btn-default" value="Proceed" />
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <table id="tbldata" class="responstable table">
+            <thead>
+                <tr>
+                    <th>
+                        EMP Code
+                    </th>
+                    <th>
+                        EMP NAME
+                    </th>
+                    <th>
+                        Hours Worked
+                    </th>
+                    <th>
+                        ShiftCount
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+}
+
+<script type="text/javascript">
+    var datatable;
+    $(document).ready(function () {
+
+        $('input[name="Date"]').datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+        GetData();
+        $("#Proceed").on("click", function () {
+            ProceedAttenance();
+
+            datatable.ajax.reload();
+        })
+
+    });
+
+    function ProceedAttenance() {
+        $.ajax({
+            type: "POST",
+            url: "@(Url.Action("ProceedAttenanceJson", "Transaction"))",
+            data: { "Date": $("#Date").val() },
+            success: function (response) {
+
+            }
+        });
+    }
+
+    function GetData() {
+        datatable = $("#tbldata").DataTable({
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": false, // this is for disable filter (search box)
+            //"orderMulti": true, // for disable multiple column at once
+            "ajax": {
+                "url": "/Transaction/ProceedAttenanceData",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (d) {
+                    d.Date = $("#Date").val();
+                }
+            },
+            "columns": [
+                {
+                    "mRender": function (data, type, row) {
+                        return '<a href=/home/UpdateAttenance?id=' + row.Attenanceid + '>' + row.EmpId + '</a>';
+                    }
+                },
+                    { "data": "EmpName", "name": "EmpName", "autoWidth": true },
+                    { "data": "sHoursWorked", "name": "HoursWorked", "autoWidth": true },
+                    { "data": "ShiftCount", "name": "ShiftCount", "autoWidth": true },
+                    { "data": "Status", "name": "Status", "autoWidth": true }],
+            "order": [[1, 'asc'], [2, 'asc']],
+            "bSort": false,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "iCookieDuration": 60 * 60 * 24,
+        })
+    }
+
+
+</script>

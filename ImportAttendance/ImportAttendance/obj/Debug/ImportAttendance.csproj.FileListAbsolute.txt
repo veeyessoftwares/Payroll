@@ -1,0 +1,6 @@
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\bin\Debug\ImportAttendance.exe.config
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\bin\Debug\ImportAttendance.exe
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\bin\Debug\ImportAttendance.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\obj\Debug\ImportAttendance.csprojResolveAssemblyReference.cache
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\obj\Debug\ImportAttendance.exe
+D:\MyFiles\Projects\DiGIN\Github\Payroll\ImportAttendance\ImportAttendance\obj\Debug\ImportAttendance.pdb
