@@ -2,11 +2,46 @@
 @{
     ViewBag.Title = "ListEmployee";
 }
-<div class="col-md-12">
-    <a class="btn btn-default" style="margin: 20px 15px 10px 0px;" href="~/Home/AddEmployee">Add New Employee</a>
+
+<div class="small-12 columns">
+    <ul class="page-headline">
+        <li class="page-header">Employee Accounts</li>
+        <li class="page-header" id="subheader">List</li>
+    </ul>
+</div>
+<div class="top-shadow"></div>
+<div class="col-md-12" style="float:right">
+    <a class="btn btn-default" style="margin: 20px 15px 10px 0px;float:right;background-color: #818285;" href="~/Home/AddEmployee">Add New Employee</a>
 </div>
 <div class="col-md-12">
-    <table id="ListEmployee" style="border: 1px solid black;" class="table">
+
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.DropDownList("UNIT", ViewBag.ListUNIT as IEnumerable<SelectListItem>, "Filter by Unit", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.DropDownList("Department", ViewBag.ListDepartment as IEnumerable<SelectListItem>, "Filter by Department", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.DropDownList("DESIGNATION", ViewBag.ListDesignation as IEnumerable<SelectListItem>, "Filter by Designation", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            @Html.DropDownList("Wagetype", ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+</div>
+<div style="clear:both"></div>
+<div class="col-md-12">
+    <table id="ListEmployee" class="responstable table">
         <thead>
             <tr>
                 <th>
@@ -45,9 +80,15 @@
         </thead>
     </table>
 </div>
-<script>
+<script type="text/javascript">
+    var datatable;
     $(document).ready(function () {
-        $("#ListEmployee").DataTable({
+
+        $("#UNIT,#Department,#DESIGNATION,#Wagetype").on("change", function () {
+            datatable.ajax.reload();
+        })
+
+        datatable = $("#ListEmployee").DataTable({
             "processing": true, // for show progress bar
             "serverSide": true, // for process server side
             "filter": false, // this is for disable filter (search box)
@@ -55,7 +96,13 @@
             "ajax": {
                 "url": "/home/ListEmployeeJson",
                 "type": "POST",
-                "datatype": "json"
+                "datatype": "json",
+                "data": function (d) {
+                    d.UNIT = $("#UNIT").val();
+                    d.Department = $("#Department").val();
+                    d.DESIGNATION = $("#DESIGNATION").val();
+                    d.Wagetype = $("#Wagetype").val();
+                }
             },
             "columns": [
                 {

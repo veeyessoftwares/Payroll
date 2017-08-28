@@ -3,38 +3,45 @@
     ViewBag.Title = "TodayAttenance";
 }
 
-<h2>Today Employee Attenance</h2>
+<div class="small-12 columns">
+    <ul class="page-headline">
+        <li class="page-header">Employee Accounts</li>
+        <li class="page-header" id="subheader">Today Attenance</li>
+    </ul>
+</div>
+<div class="top-shadow"></div>
+
 @using (Html.BeginForm())
 {
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin: 10px 0 0 0;">
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
                 @Html.DropDownList("UNIT", ViewBag.ListUNIT as IEnumerable<SelectListItem>, "Filter by Unit", htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
                 @Html.DropDownList("Department", ViewBag.ListDepartment as IEnumerable<SelectListItem>, "Filter by Department", htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="form-group">
                 @Html.DropDownList("DESIGNATION", ViewBag.ListDesignation as IEnumerable<SelectListItem>, "Filter by Designation", htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
-        @*<div class="col-md-3">
-                <div class="form-group">
-                    @Html.DropDownList("WAGESTYPE", ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
-                </div>
-            </div>*@
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.DropDownList("Wagetype", ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
 
     </div>
 }
 
-<table id="todayattenance" style="border: 1px solid black;" class="table">
+<table id="todayattenance" class="responstable table">
     <thead>
         <tr>
             <th>
@@ -76,7 +83,7 @@
 
         LoadData();
 
-        $("#UNIT,#Department,#DESIGNATION").on("change", function () {
+        $("#UNIT,#Department,#DESIGNATION,#Wagetype").on("change", function () {
             datatable.ajax.reload();
         })
 
@@ -96,6 +103,7 @@
                     d.UNIT = $("#UNIT").val();
                     d.Department = $("#Department").val();
                     d.DESIGNATION = $("#DESIGNATION").val();
+                    d.Wagetype = $("#Wagetype").val();
                 }
             },
             "columns": [

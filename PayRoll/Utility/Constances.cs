@@ -53,4 +53,10 @@
         ADUITING
     }
 
+    public enum WageType
+    {
+        Monthly = 1,
+        Weakly = 2
+    }
+
 }

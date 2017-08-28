@@ -23,5 +23,7 @@
         public virtual DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public virtual DbSet<UNIT> UNITs { get; set; }
         public virtual DbSet<WAGESTYPE> WAGESTYPEs { get; set; }
+        public virtual DbSet<ShiftMaster> ShiftMaster { get; set; }
+        public virtual DbSet<ProcessedData> ProcessedData { get; set; }
     }
 }

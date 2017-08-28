@@ -25,14 +25,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#" id="rootmode" class="navbar-brand">PayRoll</a>
+                    <a href="~/Home/Index" class="navbar-brand">PayRoll</a>
                     @*@Html.ActionLink("PayRoll", "Index", "Home", new { area = "" }, new { @id="rootmode", @class = "navbar-brand" })*@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Master", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Transaction", "Index", "Transaction")</li>
-                        <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                        @*<li>@Html.ActionLink("Master", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Transaction", "Index", "Transaction")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Reports")</li>*@
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Master</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Home/ListEmployee">Employee</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Transaction</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Home/TodayAttenance">Today Attenance</a></li>
+                                <li><a href="~/Home/AttenanceReport">Attenance Report</a></li>
+                                <li><a href="~/Home/AddAttenance">Manual Attenance</a></li>
+                                <li><a href="~/Transaction/ProceedAttenance">Process Attenance</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Reports</a>
+                        </li>
+                        <li>
+                            <a href="#" id="rootmode">Change Mode</a>
+                        </li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -41,7 +62,7 @@
     }
     else
     {
-        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#f37321">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#dd4b39">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -49,14 +70,35 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#" id="rootmode" class="navbar-brand">PayRoll</a>
+                    <a href="~/Home/Index" class="navbar-brand">PayRoll</a>
                     @*@Html.ActionLink("PayRoll", "Index", "Home", new { area = "" }, new { @id="rootmode", @class = "navbar-brand" })*@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Master", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Transaction", "Index", "Transaction")</li>
-                        <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                        @*<li>@Html.ActionLink("Master", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Transaction", "Index", "Transaction")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Reports")</li>*@
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Master</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Home/ListEmployee">Employee</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Transaction</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="~/Home/TodayAttenance">Today Attenance</a></li>
+                                <li><a href="~/Home/AttenanceReport">Attenance Report</a></li>
+                                <li><a href="~/Home/AddAttenance">Manual Attenance</a></li>
+                                <li><a href="~/Transaction/ProceedAttenance">Process Attenance</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle ">Reports</a>
+                        </li>
+                        <li>
+                            <a href="#" id="rootmode">Change Mode</a>
+                        </li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -74,7 +116,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>   
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     @*<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>*@
     @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js" />*@

@@ -38,13 +38,28 @@ namespace Common
         public string Hours { get; set; }
         public string PunchRecords { get; set; }
         public int? Attenanceid { get; set; }
+        public decimal ShiftCount { get; set; }
     }
 
     public class filter
     {
-        public int Unit { get; set; }
+        public int UNIT { get; set; }
         public int Department { get; set; }
-        public int Designation { get; set; }
+        public int DESIGNATION { get; set; }
+        public int Wagetype { get; set; }
+        public DateTime Date { get; set; }
+        public string Mode { get; set; }
+    }
+
+    public class Processeddata
+    {
+        public int EmpId { get; set; }
+        public int Attenanceid { get; set; }
+        public string EmpName { get; set; }
+        public TimeSpan HoursWorked { get; set; }
+        public string sHoursWorked { get; set; }
+        public decimal ShiftCount { get; set; }
+        public string Status { get; set; }
     }
 
 }

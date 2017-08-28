@@ -21,12 +21,12 @@
             }
         }
 
-        public List<TodayAttenanceViewModel> GetTodayAttenanceReport(string Mode, int UNIT, int Department, int DESIGNATION)
+        public List<TodayAttenanceViewModel> GetTodayAttenanceReport(filter f)
         {
             using (var _dbcontext = new PayRollEntities())
             {
                 SqlConnection con = _dbcontext.Database.Connection as SqlConnection;
-                var eMPLOYEEData = con.Query<EMPLOYEE>("[dbo].[SP_GetEmployeelist] @Mode,@UNITID,@DEPARTMENTID,@DESIGNATIONID", new { Mode = Mode, UNITID = UNIT, DEPARTMENTID = Department, DESIGNATIONID = DESIGNATION });
+                var eMPLOYEEData = con.Query<EMPLOYEE>("[dbo].[SP_GetEmployeelist] @Mode,@UNITID,@DEPARTMENTID,@DESIGNATIONID,@WAGES_TYPEID", new { Mode = f.Mode, UNITID = f.UNIT, DEPARTMENTID = f.Department, DESIGNATIONID = f.DESIGNATION, WAGES_TYPEID = f.Wagetype });
 
 
                 var Empdetails = (from e in eMPLOYEEData
@@ -68,23 +68,14 @@
             }
         }
 
-        public List<AttenanceViewModel> GetAttenanceReport(string Mode, DateTime Date)
+        public List<AttenanceViewModel> GetAttenanceReport(filter f)
         {
             using (var _dbcontext = new PayRollEntities())
             {
+                SqlConnection con = _dbcontext.Database.Connection as SqlConnection;
+                var eMPLOYEEData = con.Query<EMPLOYEE>("[dbo].[SP_GetEmployeelist] @Mode,@UNITID,@DEPARTMENTID,@DESIGNATIONID,@WAGES_TYPEID", new { Mode = f.Mode, UNITID = f.UNIT, DEPARTMENTID = f.Department, DESIGNATIONID = f.DESIGNATION, WAGES_TYPEID = f.Wagetype });
 
-                List<EMPLOYEE> emp = new List<EMPLOYEE>();
-
-                if (Mode == "ADUITING")
-                {
-                    emp = _dbcontext.EMPLOYEEs.Where(x => x.Mode == "ADUITING").ToList();
-                }
-                else
-                {
-                    emp = _dbcontext.EMPLOYEEs.ToList();
-                }
-
-                var Empdetails = (from e in emp
+                var Empdetails = (from e in eMPLOYEEData
                                   join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
                                   join dep in _dbcontext.Departments on e.DEPARTMENTID equals dep.DepId
                                   join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
@@ -98,13 +89,19 @@
                                       EmpCode = e.EMPCODE
                                   }).ToList();
 
+                var ProcessedData = (from pd in _dbcontext.ProcessedData
+                                     where pd.Date == DbFunctions.TruncateTime(f.Date)
+                                     select pd).ToList();
+
                 var Attdetails = (from ai in _dbcontext.ATTENDANCE_IMPORT
-                                  where ai.AttendanceDate == DbFunctions.TruncateTime(Date)
+                                  where ai.AttendanceDate == DbFunctions.TruncateTime(f.Date)
                                   select ai).ToList();
 
                 var res = (from e in Empdetails
                            join at in Attdetails on e.EmpCode equals at.EmployeeId into Attendance
                            from ai in Attendance.DefaultIfEmpty()
+                           join pd in ProcessedData on e.EmpCode equals pd.EmpCode into Data
+                           from d in Data.DefaultIfEmpty()
                            select new AttenanceViewModel()
                            {
                                EMPID = e.EMPID,
@@ -117,7 +114,8 @@
                                OutTime = ai != null ? ai.OutTime : null,
                                PunchRecords = ai != null ? ai.PunchRecords : "",
                                Status = ai != null ? "Present" : "Absent",
-                               Attenanceid = ai != null ? ai.Id : 0
+                               Attenanceid = ai != null ? ai.Id : 0,
+                               ShiftCount = d != null ? d.ShiftCount : 0m
                            }).ToList();
 
                 return res;
