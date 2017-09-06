@@ -32,14 +32,25 @@
             }
         }
 
-        public List<ATTENDANCE_IMPORT> GetAttenancedata(DateTime date, int WGID)
+        public List<AttenanceProcessModel> GetAttenancedata(DateTime date, int WGID)
         {
             using (var _dbcontext = new PayRollEntities())
             {
                 var Attdetails = (from ai in _dbcontext.ATTENDANCE_IMPORT
                                   join e in _dbcontext.EMPLOYEEs on ai.EmployeeId equals e.EMPCODE
                                   where ai.AttendanceDate == DbFunctions.TruncateTime(date) && e.WAGES_TYPEID == WGID
-                                  select ai).ToList();
+                                  select new AttenanceProcessModel
+                                  {
+                                      Id = ai.Id,
+                                      AttendanceLogId = ai.AttendanceLogId,
+                                      AttendanceDate = ai.AttendanceDate,
+                                      EmployeeId = ai.EmployeeId,
+                                      InTime = ai.InTime,
+                                      OutTime = ai.OutTime,
+                                      PunchRecords = ai.PunchRecords,
+                                      ActualSalary = e.ACTUAL_SALARY,
+                                      AduitingSalary = e.ADUITING_SALARY
+                                  }).ToList();
                 return Attdetails;
             }
 
@@ -56,6 +67,8 @@
                     pd.HoursWorked = p.HoursWorked;
                     pd.ShiftCount = p.ShiftCount;
                     pd.Status = p.Status;
+                    pd.ActualSalary = p.ActualSalary;
+                    pd.AduitingSalary = p.AduitingSalary;
                     _dbcontext.Entry(pd).State = EntityState.Modified;
                     _dbcontext.SaveChanges();
                 }

@@ -14,5 +14,7 @@
         public TimeSpan HoursWorked { get; set; }
         public decimal ShiftCount { get; set; }
         public string Status { get; set; }
+        public Nullable<decimal> ActualSalary { get; set; }
+        public Nullable<decimal> AduitingSalary { get; set; }
     }
 }

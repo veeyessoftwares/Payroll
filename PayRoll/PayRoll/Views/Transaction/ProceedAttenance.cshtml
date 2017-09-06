@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-md-12">
-        <table id="tbldata" class="responstable table">
+        <table id="tbldata" class="responstable">
             <thead>
                 <tr>
                     <th>
@@ -70,7 +70,7 @@
     function ProceedAttenance() {
         $.ajax({
             type: "POST",
-            url: "@(Url.Action("ProceedAttenanceJson", "Transaction"))",
+            url: "@(Url.Action("ProceedAttenanceData", "Transaction"))",
             data: { "Date": $("#Date").val() },
             success: function (response) {
 
@@ -85,7 +85,7 @@
             "filter": false, // this is for disable filter (search box)
             //"orderMulti": true, // for disable multiple column at once
             "ajax": {
-                "url": "/Transaction/ProceedAttenanceData",
+                "url": "/Transaction/ProceedAttenanceJson",
                 "type": "POST",
                 "datatype": "json",
                 "data": function (d) {

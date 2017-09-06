@@ -163,6 +163,17 @@
             }
         }
 
+        public List<SalaryData> GetSalaryData(filter f)
+        {
+            using (var _dbcontext = new PayRollEntities())
+            {
+                SqlConnection con = _dbcontext.Database.Connection as SqlConnection;
+                var sd = con.Query<SalaryData>("[dbo].[GetSalaryData] @Mode,@WAGES_TYPEID,@StartDate,@EndDate", new { Mode = f.Mode, WAGES_TYPEID = f.Wagetype, StartDate = f.StartDate, EndDate = f.EndDate });
+
+                return sd.ToList();
+            }
+        }
+
         #region Pick List
 
         public IEnumerable<SelectListItem> ListDepartment()

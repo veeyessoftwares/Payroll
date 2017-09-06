@@ -19,52 +19,55 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/15/2017 10:45:06</publishTime>
     </File>
     <File Include="bin/BLL.dll">
-      <publishTime>08/29/2017 01:10:37</publishTime>
+      <publishTime>09/06/2017 09:57:27</publishTime>
     </File>
     <File Include="bin/Common.dll">
-      <publishTime>08/29/2017 01:10:36</publishTime>
+      <publishTime>09/06/2017 09:57:26</publishTime>
     </File>
     <File Include="bin/DAL.dll">
-      <publishTime>08/29/2017 01:10:35</publishTime>
+      <publishTime>09/06/2017 09:57:25</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>07/22/2016 14:52:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>02/03/2015 09:32:26</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>02/03/2015 09:32:26</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>09/06/2017 09:49:41</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>07/12/2016 11:45:42</publishTime>
+      <publishTime>12/07/2016 11:45:42</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>07/12/2016 11:50:34</publishTime>
+      <publishTime>12/07/2016 11:50:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>06/12/2016 15:15:48</publishTime>
+      <publishTime>12/06/2016 15:15:48</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>07/12/2016 11:49:10</publishTime>
+      <publishTime>12/07/2016 11:49:10</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>07/12/2016 11:50:34</publishTime>
+      <publishTime>12/07/2016 11:50:34</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>06/12/2016 15:09:52</publishTime>
+      <publishTime>12/06/2016 15:09:52</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/15/2015 02:06:24</publishTime>
@@ -100,13 +103,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2012 15:23:58</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>03/08/2014 20:33:56</publishTime>
+      <publishTime>08/03/2014 20:33:56</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>11/27/2012 13:00:52</publishTime>
     </File>
     <File Include="bin/PayRoll.dll">
-      <publishTime>08/29/2017 01:10:52</publishTime>
+      <publishTime>09/06/2017 09:57:43</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 20:19:46</publishTime>
@@ -151,7 +154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:02:18</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>11/02/2014 15:26:04</publishTime>
+      <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>01/28/2015 04:02:32</publishTime>
@@ -169,7 +172,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/29/2017 01:10:35</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>10/09/2013 17:28:38</publishTime>
+      <publishTime>09/10/2013 17:28:38</publishTime>
     </File>
     <File Include="Content/bootstrap-datepicker.css">
       <publishTime>07/19/2017 00:40:24</publishTime>
@@ -331,7 +334,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2017 22:20:41</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/16/2017 22:40:10</publishTime>
+      <publishTime>09/06/2017 09:46:49</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datepicker.js">
       <publishTime>07/19/2017 00:39:24</publishTime>
@@ -430,7 +433,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2017 23:25:50</publishTime>
     </File>
     <File Include="Views/Home/AttenanceReport.cshtml">
-      <publishTime>08/29/2017 01:08:18</publishTime>
+      <publishTime>08/29/2017 01:10:57</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>07/15/2017 10:42:19</publishTime>
@@ -439,10 +442,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2017 15:05:18</publishTime>
     </File>
     <File Include="Views/Home/ListEmployee.cshtml">
-      <publishTime>08/29/2017 01:07:57</publishTime>
+      <publishTime>08/29/2017 01:11:21</publishTime>
     </File>
     <File Include="Views/Home/TodayAttenance.cshtml">
-      <publishTime>08/29/2017 01:06:44</publishTime>
+      <publishTime>08/29/2017 01:11:38</publishTime>
     </File>
     <File Include="Views/Home/UpdateAttenance.cshtml">
       <publishTime>08/27/2017 23:37:03</publishTime>
@@ -478,7 +481,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/15/2017 10:43:46</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/27/2017 23:38:29</publishTime>
+      <publishTime>09/06/2017 08:50:31</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/15/2017 10:43:47</publishTime>
@@ -487,7 +490,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/22/2017 23:57:32</publishTime>
     </File>
     <File Include="Views/Transaction/ProceedAttenance.cshtml">
-      <publishTime>08/29/2017 01:08:45</publishTime>
+      <publishTime>08/31/2017 01:52:11</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/15/2017 10:42:19</publishTime>
