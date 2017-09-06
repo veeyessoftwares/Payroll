@@ -4,13 +4,20 @@
     ViewBag.Title = "UpdateAttenance";
 }
 
+<div class="small-12 columns">
+    <ul class="page-headline">
+        <li class="page-header">Employee Accounts</li>
+        <li class="page-header" id="subheader">Update Attenance</li>
+    </ul>
+</div>
+<div class="top-shadow"></div>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Update Attenance</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.sAttendanceDate)

@@ -56,6 +56,8 @@
     <Compile Include="Table\Department.cs" />
     <Compile Include="Table\Designation.cs" />
     <Compile Include="Table\EMPLOYEE.cs" />
+    <Compile Include="Table\ProcessedData.cs" />
+    <Compile Include="Table\ShiftMaster.cs" />
     <Compile Include="Table\UNIT.cs" />
     <Compile Include="Table\WAGESTYPE.cs" />
   </ItemGroup>

@@ -5,6 +5,6 @@ D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Debug\EntityFramework.d
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Debug\EntityFramework.SqlServer.dll
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Debug\EntityFramework.xml
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\bin\Debug\EntityFramework.SqlServer.xml
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Debug\DAL.dll
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Debug\DAL.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache

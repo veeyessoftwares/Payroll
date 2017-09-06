@@ -32,8 +32,13 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Add New Employee</h4>
-        <hr />
+        <div class="small-12 columns">
+            <ul class="page-headline">
+                <li class="page-header">Employee Account</li>
+                <li class="page-header" id="subheader">Add</li>
+            </ul>
+        </div>
+        <div class="top-shadow"></div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="col-md-6">
@@ -191,7 +196,7 @@
 
         $(document).ready(function () {
             $('input[name="DOB"],input[name="DOJ"]').datepicker({
-                dateFormat: "dd/MM/yyyy",
+                format: "dd/mm/yyyy",
                 changeMonth: true,
                 changeYear: true,
                 yearRange: "-60:+0"

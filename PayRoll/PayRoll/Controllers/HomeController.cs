@@ -289,6 +289,11 @@ namespace PayRoll.Controllers
 
         public ActionResult ListEmployee()
         {
+            CommonRepository _repo = new CommonRepository();
+            ViewBag.ListDepartment = _repo.ListDepartment();
+            ViewBag.ListDesignation = _repo.ListDesignation();
+            ViewBag.ListUNIT = _repo.ListUNIT();
+            ViewBag.ListWAGESTYPE = _repo.ListWAGESTYPE();
             return View();
         }
 
@@ -297,6 +302,12 @@ namespace PayRoll.Controllers
         {
             if (Session[Constances.UserId] != null)
             {
+                filter f = new filter();
+                f.UNIT = Request.Form["UNIT"].ToString() != "" ? Convert.ToInt32(Request.Form["UNIT"]) : 0;
+                f.Department = Request.Form["Department"].ToString() != "" ? Convert.ToInt32(Request.Form["Department"]) : 0;
+                f.DESIGNATION = Request.Form["DESIGNATION"].ToString() != "" ? Convert.ToInt32(Request.Form["DESIGNATION"]) : 0;
+                f.Wagetype = Request.Form["Wagetype"].ToString() != "" ? Convert.ToInt32(Request.Form["Wagetype"]) : 0;
+                f.Mode = Session[Constances.Mode].ToString();
 
                 var draw = Request.Form.GetValues("draw").FirstOrDefault();
                 var start = Request.Form.GetValues("start").FirstOrDefault();
@@ -310,7 +321,7 @@ namespace PayRoll.Controllers
                 int totalRecords = 0;
 
                 EmployeeRepository emp = new EmployeeRepository();
-                var res = emp.ListEmployee(Session[Constances.Mode].ToString());
+                var res = emp.ListEmployee(f);
 
                 totalRecords = res.Count();
                 var data = res.Skip(skip).Take(pageSize).ToList();
@@ -343,10 +354,12 @@ namespace PayRoll.Controllers
         {
             if (Session[Constances.UserId] != null)
             {
-                int UNIT = Request.Form["UNIT"].ToString() != "" ? Convert.ToInt32(Request.Form["UNIT"]) : 0;
-                int Department = Request.Form["Department"].ToString() != "" ? Convert.ToInt32(Request.Form["Department"]) : 0;
-                int DESIGNATION = Request.Form["DESIGNATION"].ToString() != "" ? Convert.ToInt32(Request.Form["DESIGNATION"]) : 0;
-
+                filter f = new filter();
+                f.UNIT = Request.Form["UNIT"].ToString() != "" ? Convert.ToInt32(Request.Form["UNIT"]) : 0;
+                f.Department = Request.Form["Department"].ToString() != "" ? Convert.ToInt32(Request.Form["Department"]) : 0;
+                f.DESIGNATION = Request.Form["DESIGNATION"].ToString() != "" ? Convert.ToInt32(Request.Form["DESIGNATION"]) : 0;
+                f.Wagetype = Request.Form["Wagetype"].ToString() != "" ? Convert.ToInt32(Request.Form["Wagetype"]) : 0;
+                f.Mode = Session[Constances.Mode].ToString();
                 var draw = Request.Form.GetValues("draw").FirstOrDefault();
                 var start = Request.Form.GetValues("start").FirstOrDefault();
                 var length = Request.Form.GetValues("length").FirstOrDefault();
@@ -359,7 +372,7 @@ namespace PayRoll.Controllers
                 int totalRecords = 0;
 
                 CommonRepository c = new CommonRepository();
-                var res = c.GetTodayAttenanceReport(Session[Constances.Mode].ToString(), UNIT, Department, DESIGNATION);
+                var res = c.GetTodayAttenanceReport(f);
 
                 totalRecords = res.Count();
                 var data = res.Skip(skip).Take(pageSize).ToList();
@@ -390,12 +403,12 @@ namespace PayRoll.Controllers
 
         public ActionResult AttenanceReport(string Date="")
         {
-            ViewBag.date = Date != "" ? Date : DateTime.Now.AddDays(-1).ToShortDateString();
-            //CommonRepository _repo = new CommonRepository();
-            //ViewBag.ListDepartment = _repo.ListDepartment();
-            //ViewBag.ListDesignation = _repo.ListDesignation();
-            //ViewBag.ListUNIT = _repo.ListUNIT();
-            //ViewBag.ListWAGESTYPE = _repo.ListWAGESTYPE();
+            ViewBag.date = Date != "" ? Date : DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+            CommonRepository _repo = new CommonRepository();
+            ViewBag.ListDepartment = _repo.ListDepartment();
+            ViewBag.ListDesignation = _repo.ListDesignation();
+            ViewBag.ListUNIT = _repo.ListUNIT();
+            ViewBag.ListWAGESTYPE = _repo.ListWAGESTYPE();
             return View();
         }
 
@@ -404,7 +417,14 @@ namespace PayRoll.Controllers
         {
             if (Session[Constances.UserId] != null)
             {
-                DateTime Date = Request.Form["Date"].ToString() != "" ? Convert.ToDateTime(Request.Form["Date"]) : DateTime.Now.AddDays(-1);
+                filter f = new filter();
+                f.Date = Request.Form["Date"].ToString() != "" ? Convert.ToDateTime(Request.Form["Date"]) : DateTime.Now.AddDays(-1);
+
+                f.UNIT = Request.Form["UNIT"].ToString() != "" ? Convert.ToInt32(Request.Form["UNIT"]) : 0;
+                f.Department = Request.Form["Department"].ToString() != "" ? Convert.ToInt32(Request.Form["Department"]) : 0;
+                f.DESIGNATION = Request.Form["DESIGNATION"].ToString() != "" ? Convert.ToInt32(Request.Form["DESIGNATION"]) : 0;
+                f.Wagetype = Request.Form["Wagetype"].ToString() != "" ? Convert.ToInt32(Request.Form["Wagetype"]) : 0;
+                f.Mode = Session[Constances.Mode].ToString();
 
                 var draw = Request.Form.GetValues("draw").FirstOrDefault();
                 var start = Request.Form.GetValues("start").FirstOrDefault();
@@ -418,7 +438,7 @@ namespace PayRoll.Controllers
                 int totalRecords = 0;
 
                 CommonRepository c = new CommonRepository();
-                var res = c.GetAttenanceReport(Session[Constances.Mode].ToString(), Date);
+                var res = c.GetAttenanceReport(f);
 
                 totalRecords = res.Count();
                 var data = res.Skip(skip).Take(pageSize).ToList();
@@ -446,8 +466,17 @@ namespace PayRoll.Controllers
                             {
                                 PunchRecords[i] = PunchRecords[i].Substring(0, 5);
                                 PunchRecords[i + 1] = PunchRecords[i + 1].Substring(0, 5);
-                                TimeSpan tsa = TimeSpan.Parse(PunchRecords[i + 1]).Subtract(TimeSpan.Parse(PunchRecords[i]));
-                                ts = ts.Add(tsa);
+                                if (TimeSpan.Parse(PunchRecords[i + 1]) > TimeSpan.Parse(PunchRecords[i]))
+                                {
+                                    TimeSpan tsa = TimeSpan.Parse(PunchRecords[i + 1]).Subtract(TimeSpan.Parse(PunchRecords[i]));
+                                    ts = ts.Add(tsa);
+                                }
+                                else
+                                {
+                                    TimeSpan day = TimeSpan.FromHours(24);
+                                    TimeSpan tsa = TimeSpan.Parse(PunchRecords[i + 1]).Add(day).Subtract(TimeSpan.Parse(PunchRecords[i]));
+                                    ts = ts.Add(tsa);
+                                }
                                 i++;
                             }
                             d.Hours = Convert.ToDateTime(DateTime.Now.Date + ts).ToString("HH:mm");
@@ -473,7 +502,7 @@ namespace PayRoll.Controllers
             CommonRepository _repo = new CommonRepository();
             var at = _repo.GetAttenancedate(id);
             am.Id = at.Id;
-            am.sAttendanceDate = Convert.ToDateTime(at.AttendanceDate).ToString("MM/dd/yyyy");
+            am.sAttendanceDate = Convert.ToDateTime(at.AttendanceDate).ToString("dd/MM/yyyy");
             am.EmployeeId = at.EmployeeId;
             am.sInTime = Convert.ToDateTime(DateTime.Now.Date + at.InTime).ToString("hh:mm tt");
             am.sOutTime = Convert.ToDateTime(DateTime.Now.Date + at.OutTime).ToString("hh:mm tt");
@@ -497,7 +526,7 @@ namespace PayRoll.Controllers
                 return View(am);
             }
 
-            return RedirectToAction("AttenanceReport", new { Date = Convert.ToDateTime(am.sAttendanceDate).ToString("MM/dd/yyyy") });
+            return RedirectToAction("AttenanceReport", new { Date = Convert.ToDateTime(am.sAttendanceDate).ToString("dd/MM/yyyy") });
         }
 
         public ActionResult AddAttenance()

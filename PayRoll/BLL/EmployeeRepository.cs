@@ -3,8 +3,10 @@ namespace BLL
 {
     using Common;
     using DAL;
+    using Dapper;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Web.Mvc;
     public class EmployeeRepository
@@ -104,68 +106,41 @@ namespace BLL
             }
         }
 
-        public List<EmployeeViewModel> ListEmployee(string mode)
+        public List<EmployeeViewModel> ListEmployee(filter f)
         {
             using (var _dbcontext = new PayRollEntities())
             {
-                if (mode == "ADUITING")
-                {
-                    var Emp = (from e in _dbcontext.EMPLOYEEs
-                               join dep in _dbcontext.Departments on e.DEPARTMENTID equals dep.DepId
-                               join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
-                               join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
-                               join W in _dbcontext.WAGESTYPEs on e.WAGES_TYPEID equals W.WGId
-                               where e.IsDeleted == false && e.Mode == mode
-                               select new EmployeeViewModel()
-                               {
-                                   EMPID = e.EMPID,
-                                   EMPCODE = e.EMPCODE,
-                                   MACCODE = e.MACCODE,
-                                   EMP_NAME = e.EMP_NAME,
-                                   FATHER_NAME = e.FATHER_NAME,
-                                   MOTHER_NAME = e.MOTHER_NAME,
-                                   DOB = e.DOB,
-                                   DOJ = e.DOJ,
-                                   MARITAL_STATUS = e.MARITAL_STATUS,
-                                   GENDER = e.GENDER,
-                                   ACTUAL_SALARY = e.ACTUAL_SALARY,
-                                   ADUITING_SALARY = e.ADUITING_SALARY,
-                                   UNIT = u.Name,
-                                   DEPARTMENT = dep.DEPT,
-                                   DESIGNATION = des.DESG,
-                                   WAGESTYPE = W.Type
-                               }).OrderBy(x => x.EMPCODE).ToList();
-                    return Emp;
-                }
-                else
-                {
-                    var Emp = (from e in _dbcontext.EMPLOYEEs
-                               join dep in _dbcontext.Departments on e.DEPARTMENTID equals dep.DepId
-                               join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
-                               join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
-                               join W in _dbcontext.WAGESTYPEs on e.WAGES_TYPEID equals W.WGId
-                               where e.IsDeleted == false
-                               select new EmployeeViewModel()
-                               {
-                                   EMPID = e.EMPID,
-                                   EMPCODE = e.EMPCODE,
-                                   MACCODE = e.MACCODE,
-                                   EMP_NAME = e.EMP_NAME,
-                                   FATHER_NAME = e.FATHER_NAME,
-                                   MOTHER_NAME = e.MOTHER_NAME,
-                                   DOB = e.DOB,
-                                   DOJ = e.DOJ,
-                                   MARITAL_STATUS = e.MARITAL_STATUS,
-                                   GENDER = e.GENDER,
-                                   ACTUAL_SALARY = e.ACTUAL_SALARY,
-                                   ADUITING_SALARY = e.ADUITING_SALARY,
-                                   UNIT = u.Name,
-                                   DEPARTMENT = dep.DEPT,
-                                   DESIGNATION = des.DESG,
-                                   WAGESTYPE = W.Type
-                               }).OrderBy(x => x.EMPCODE).ToList();
-                    return Emp;
-                }
+
+                SqlConnection con = _dbcontext.Database.Connection as SqlConnection;
+                var eMPLOYEEData = con.Query<EMPLOYEE>("[dbo].[SP_GetEmployeelist] @Mode,@UNITID,@DEPARTMENTID,@DESIGNATIONID,@WAGES_TYPEID", new { Mode = f.Mode, UNITID = f.UNIT, DEPARTMENTID = f.Department, DESIGNATIONID = f.DESIGNATION, WAGES_TYPEID = f.Wagetype });
+
+                var Emp = (from e in eMPLOYEEData
+                           join dep in _dbcontext.Departments on e.DEPARTMENTID equals dep.DepId
+                           join des in _dbcontext.Designations on e.DESIGNATIONID equals des.DegId
+                           join u in _dbcontext.UNITs on e.UNITID equals u.UnitId
+                           join W in _dbcontext.WAGESTYPEs on e.WAGES_TYPEID equals W.WGId
+                           select new EmployeeViewModel()
+                           {
+                               EMPID = e.EMPID,
+                               EMPCODE = e.EMPCODE,
+                               MACCODE = e.MACCODE,
+                               EMP_NAME = e.EMP_NAME,
+                               FATHER_NAME = e.FATHER_NAME,
+                               MOTHER_NAME = e.MOTHER_NAME,
+                               DOB = e.DOB,
+                               DOJ = e.DOJ,
+                               MARITAL_STATUS = e.MARITAL_STATUS,
+                               GENDER = e.GENDER,
+                               ACTUAL_SALARY = e.ACTUAL_SALARY,
+                               ADUITING_SALARY = e.ADUITING_SALARY,
+                               UNIT = u.Name,
+                               DEPARTMENT = dep.DEPT,
+                               DESIGNATION = des.DESG,
+                               WAGESTYPE = W.Type
+                           }).OrderBy(x => x.EMPCODE).ToList();
+                return Emp;
+
+
             }
         }
 

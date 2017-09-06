@@ -1,3 +1,4 @@
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\System.Reflection.Metadata.dll
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\ApplicationInsights.config
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\csc.exe
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -7,7 +8,6 @@ D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\Microsoft.Co
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\Microsoft.VisualBasic.Core.targets
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\System.Collections.Immutable.dll
-D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\System.Reflection.Metadata.dll
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\vbc.exe
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\VBCSCompiler.exe
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\roslyn\VBCSCompiler.exe.config
@@ -90,3 +90,5 @@ D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\Dapper.xml
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\obj\Debug\PayRoll.csprojResolveAssemblyReference.cache
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\obj\Debug\PayRoll.dll
 D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\obj\Debug\PayRoll.pdb
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\itextsharp.dll
+D:\MyFiles\Projects\DiGIN\Github\Payroll\PayRoll\PayRoll\bin\itextsharp.xml
