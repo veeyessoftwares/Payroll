@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "SalaryInfo";
+}
+
+<div class="small-12 columns">
+    <ul class="page-headline">
+        <li class="page-header">Employee Accounts</li>
+        <li class="page-header" id="subheader">Salary Report</li>
+    </ul>
+</div>
+<div class="top-shadow"></div>
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-12" style="margin: 10px 0 0 0;">
+        <div class="col-md-2">
+            <div class="form-group">
+                @Html.DropDownList("Wagetype", ViewBag.ListWAGESTYPE as IEnumerable<SelectListItem>, "--Select WAGESTYPE--", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-2">
+            @Html.Editor("StartDate", new { htmlAttributes = new { @class = "form-control", placeholder = "dd/MM/yyyy" } })
+        </div>
+        <div class="col-md-2">
+            @Html.Editor("EndDate", new { htmlAttributes = new { @class = "form-control", placeholder = "dd/MM/yyyy" } })
+        </div>
+
+        <div class="col-md-2" style="float:right;">
+            <a href="#" id="downloadpdf">Click to Download PDF</a>
+        </div>
+
+    </div>
+
+}
+
+<table id="SalaryData" class="responstable table">
+    <thead>
+        <tr>
+            <th>
+                EmpCode
+            </th>
+            <th>
+                Employee Name
+            </th>
+            <th>
+                UnitName
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Designation
+            </th>
+            <th>
+                ShiftCount
+            </th>
+            <th>
+                Per Day Salary
+            </th>
+            <th>
+                Salary
+            </th>
+        </tr>
+    </thead>
+</table>
+
+
+<script type="text/javascript">
+    var datatable;
+    $(document).ready(function () {
+
+        $('input[name="StartDate"],input[name="EndDate"]').datepicker({
+            format: "dd/mm/yyyy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+
+        LoadData();
+
+        $("#downloadpdf").on("click", function (e) {
+            if ($("#Wagetype").val() != "" && $("#StartDate").val() != "" && $("#EndDate").val() != "") {
+                window.location.href = "/Transaction/CreatePDF?StartDate=" + $("#StartDate").val() + "&EndDate=" + $("#EndDate").val() + "&Wagetype=" + $("#Wagetype").val()
+                @*$.ajax({
+                    cache: false,
+                    async: false,
+                    type: "POST",
+                    url: "@Url.Action("CreatePDF", "Transaction")",
+                    data: { "StartDate": $("#StartDate").val(), "EndDate": $("#EndDate").val(), "Wagetype": $("#Wagetype").val() },
+                    success: function (data) {
+                        dataResult = data.Message;
+
+                    }
+                });*@
+            } else {
+                alert("Please Select all the values");
+            }
+        })
+
+        $("#StartDate,#EndDate,#Wagetype").on("change", function () {
+            if ($("#Wagetype").val() != "" && $("#StartDate").val() != "" && $("#EndDate").val() != "") {
+                datatable.ajax.reload();
+            }
+
+        })
+
+    });
+
+    function LoadData() {
+
+        datatable = $("#SalaryData").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": false,
+            "ajax": {
+                "url": "/Transaction/GetSalaryDataJson",
+                "type": "POST",
+                "datatype": "json",
+                "data": function (d) {
+                    d.StartDate = $("#StartDate").val();
+                    d.EndDate = $("#EndDate").val();
+                    d.Wagetype = $("#Wagetype").val();
+                }
+            },
+            "columns": [
+                //{ "data": "Unit", "name": "Unit", "autoWidth": true },
+                //{
+                //    "mRender": function (data, type, row) {
+                //        if (row.Attenanceid != 0) {
+                //            return '<a href=/home/UpdateAttenance?id=' + row.Attenanceid + '>' + row.EmpCode + '</a>';
+                //        } else {
+                //            return row.EmpCode
+                //        }
+
+                //    }
+                //},
+                    { "data": "EMPCODE", "name": "EMPCODE", "autoWidth": true },
+                    { "data": "EMP_NAME", "name": "EMP_NAME", "autoWidth": true },
+                    { "data": "UnitName", "name": "UnitName", "autoWidth": true },
+                    { "data": "Department", "name": "Department", "autoWidth": true },
+                    { "data": "Designation", "name": "Designation", "autoWidth": true },
+                    { "data": "ShiftCount", "name": "ShiftCount", "autoWidth": true },
+                    { "data": "Perdaysalary", "name": "Perdaysalary", "autoWidth": true },
+                    { "data": "Salary", "name": "Salary", "autoWidth": true }],
+            "order": [[1, 'asc'], [2, 'asc'], [3, 'asc'], [4, 'asc'], [5, 'asc']],
+            "bSort": false,
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "iCookieDuration": 60 * 60 * 24,
+        })
+
+
+    }
+
+</script>
