@@ -159,3 +159,8 @@ h1 {
 h1 span {
   color: #167F92;
 }*/
+
+.navbar-inverse {
+    background-color: #283e4a !important;
+    border-color: #080808;
+}

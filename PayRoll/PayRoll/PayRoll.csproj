@@ -332,6 +332,7 @@
     <Content Include="Views\Home\AddAttenance.cshtml" />
     <Content Include="Views\Home\UpdateAttenance.cshtml" />
     <Content Include="Views\Transaction\ProceedAttenance.cshtml" />
+    <Content Include="Views\Transaction\SalaryInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
